@@ -162,17 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6810e3c4a0c9a014688c11be6b71aad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxSize: {x: 1, y: 1, z: 0}
-  maxDist: 0.15
-  groundLayer:
+  groundLayerMask:
     serializedVersion: 2
     m_Bits: 8
-  GroundCheck: {fileID: 3918038130119055358}
-  stats:
-    speed: 0
-    jumpHeight: 0
-    jumpForce: 0
-  velocity: {x: 0, y: 0}
 --- !u!1 &3157667823763685108
 GameObject:
   m_ObjectHideFlags: 0
