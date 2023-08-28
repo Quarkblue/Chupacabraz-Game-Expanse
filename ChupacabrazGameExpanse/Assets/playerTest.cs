@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -30,6 +31,7 @@ public class playerTest : MonoBehaviour
     private bool isGrounded;
     private float rayCastLength;
     public LayerMask groundLayerMask;
+    private bool isInvulnerable;
 
     // Start is called before the first frame update
     void Start()
@@ -53,11 +55,15 @@ public class playerTest : MonoBehaviour
         {
             inventory.items[i] = emptyShell;
         }
+        
+        //player init
+        isInvulnerable = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(inventory.health);
         rb.velocity = new Vector2(x: horizontal * playerSpeed, y: rb.velocity.y);
         horizontal = Input.GetAxis("Horizontal");
 
@@ -71,4 +77,23 @@ public class playerTest : MonoBehaviour
 
     }
 
+    public void takeDamage(int damage)
+    {
+        if (!isInvulnerable)
+        {
+            inventory.health -= damage;
+            if (inventory.health < 0)
+            {
+                Destroy(gameObject);
+            }
+            StartCoroutine(invulnerability());
+        }
+    }
+    
+    IEnumerator invulnerability()
+    {
+        isInvulnerable = true;
+        yield return new WaitForSeconds(2);
+        isInvulnerable = false;
+    }
 }
