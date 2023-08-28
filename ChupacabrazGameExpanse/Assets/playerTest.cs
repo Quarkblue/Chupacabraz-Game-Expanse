@@ -4,6 +4,7 @@ using Unity.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class playerTest : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class playerTest : MonoBehaviour
     }
     public Inventory inventory;
 
-    //movement variables
+    //movement and environment variables
     private Rigidbody2D rb;
     private float horizontal;
     private float playerSpeed;
@@ -31,7 +32,9 @@ public class playerTest : MonoBehaviour
     private bool isGrounded;
     private float rayCastLength;
     public LayerMask groundLayerMask;
+
     private bool isInvulnerable;
+    private string currSceneName;
 
     // Start is called before the first frame update
     void Start()
@@ -58,12 +61,13 @@ public class playerTest : MonoBehaviour
         
         //player init
         isInvulnerable = false;
+        currSceneName = SceneManager.GetActiveScene().name;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(inventory.health);
+        
         rb.velocity = new Vector2(x: horizontal * playerSpeed, y: rb.velocity.y);
         horizontal = Input.GetAxis("Horizontal");
 
@@ -75,6 +79,22 @@ public class playerTest : MonoBehaviour
 
         isGrounded = Physics2D.Raycast(origin: transform.position, direction: Vector2.down, distance: rayCastLength, groundLayerMask);
 
+
+        //time travelling
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (currSceneName == "PresentLevel")
+            {
+                SceneManager.LoadScene("FutureLevel");
+                currSceneName = "FutureLevel";
+            }else if(currSceneName == "FutureLevel")
+            {
+                SceneManager.LoadScene("PresentLevel");
+                currSceneName = "PresentLevel";
+            }
+
+            Debug.Log(currSceneName);
+        }
     }
 
     public void takeDamage(int damage)
