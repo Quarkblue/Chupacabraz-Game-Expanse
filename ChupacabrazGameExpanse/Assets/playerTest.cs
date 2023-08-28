@@ -36,6 +36,12 @@ public class playerTest : MonoBehaviour
     private bool isInvulnerable;
     private string currSceneName;
 
+
+    // Reference variables for unity
+    public GameObject NotifTxt;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +50,7 @@ public class playerTest : MonoBehaviour
         rayCastLength = 0.7f;
         isGrounded = true;
         playerSpeed = 5;
-        jumpForce = 7;
+        jumpForce = 10;
 
         //inventory init
         emptyShell.id = 0;
@@ -116,4 +122,22 @@ public class playerTest : MonoBehaviour
         yield return new WaitForSeconds(2);
         isInvulnerable = false;
     }
+
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "invisibleBox")
+        {
+            NotifTxt.SetActive(true);
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "invisibleBox")
+        {
+            NotifTxt.SetActive(false);
+        }
+    }
+
 }
