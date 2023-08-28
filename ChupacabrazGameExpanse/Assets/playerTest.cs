@@ -5,75 +5,38 @@ using UnityEngine.InputSystem;
 
 public class playerTest : MonoBehaviour
 {
-    [System.Serializable]
-    public struct Stats
-    {
-        public float speed;
-        public float jumpHeight;
-        public float jumpForce;
-
-    }
-
-
-    public Vector3 boxSize;
-    public float maxDist;
-
-
-    public LayerMask groundLayer;
-    public Transform GroundCheck;
-    
-    public Stats stats;
-
-
     private Rigidbody2D rb;
-    public Vector2 velocity;
+    private float horizontal;
+    private float playerSpeed;
+    private float jumpForce;
+    private bool isGrounded;
+    private float rayCastLength;
+    public LayerMask groundLayerMask;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        rayCastLength = 0.7f;
+        isGrounded = true;
+        playerSpeed = 5;
+        jumpForce = 7;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space))
-        {
-            if (isGrounded())
-            {
-                rb.AddForce(new Vector2(0, 10), ForceMode2D.Impulse);
-            }
-        }
-        if(Input.GetKeyDown(KeyCode.S))
-        {
-              rb.AddForce(new Vector2(0, -10), ForceMode2D.Impulse);
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            rb.velocity = new Vector2(10, 0);
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            rb.velocity = new Vector2(-10, 0);
-        }
-        if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
-        {
-            rb.velocity = new Vector2(0, 0);
+        rb.velocity = new Vector2(x: horizontal * playerSpeed, y: rb.velocity.y);
+        horizontal = Input.GetAxis("Horizontal");
+        //Debug.Log(horizontal);
 
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            rb.velocity = new Vector2(x: rb.velocity.x, y: jumpForce);
         }
 
+        isGrounded = Physics2D.Raycast(origin: transform.position, direction: Vector2.down, distance: rayCastLength, groundLayerMask);
+        Debug.DrawRay(transform.position, Vector3.down * rayCastLength, Color.red);
     }
 
-
-    private bool isGrounded()
-    {
-        if (Physics2D.BoxCast(transform.position, boxSize, 0, -transform.up, maxDist, groundLayer))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
 }
