@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScreen.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Game/PortPre.unity
+    path: Assets/Scenes/Game/Test/PortPre.unity
     guid: 87a5eb6fb58b7bb408965adc50e9d23f
   - enabled: 1
-    path: Assets/Scenes/Game/PortPost.unity
+    path: Assets/Scenes/Game/Test/PortPost.unity
     guid: 9dcf929bea9d6974fa6ae98594ce52bb
   m_configObjects: {}
