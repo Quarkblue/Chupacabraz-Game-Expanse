@@ -42,6 +42,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: MainBg
+    uniqueID: 1683171537
+    locked: 0
+  - name: Background
+    uniqueID: 633682665
+    locked: 0
+  - name: Mountain
+    uniqueID: 3455332467
+    locked: 0
+  - name: Foreground
+    uniqueID: 1217471731
+    locked: 0
   - name: Ground
     uniqueID: 2807639733
+    locked: 0
+  - name: Player
+    uniqueID: 3062862033
     locked: 0
