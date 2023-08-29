@@ -1,10 +1,10 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class playerTest : MonoBehaviour
@@ -32,27 +32,36 @@ public class playerTest : MonoBehaviour
     private float jumpForce;
     private bool isGrounded;
     private float rayCastLength;
-    public LayerMask groundLayerMask;
+    private LayerMask groundLayerMask;
 
     private bool isInvulnerable;
     private string currSceneName;
 
-    public bool canTimeTravel;
+    private bool canTimeTravel;
 
 
-    // Reference variables for unity
     public GameObject NotifTxt;
-    public Animator camAnimatorRef;
+    private Animator camAnimatorRef;
 
-
+    // "playerHealth", "playerSand", "playerItems", "playerSequenceIndex"
 
     // Start is called before the first frame update
     void Start()
     {
+        currSceneName = SceneManager.GetActiveScene().name;
 
-        camAnimatorRef = Object.FindObjectOfType<CinemachineVirtualCamera>().gameObject.GetComponent<Animator>();
+        NotifTxt = GameObject.Find("TimeTravelTxt");
+        NotifTxt.SetActive(false);
+        groundLayerMask = LayerMask.GetMask("Ground");
+        if (currSceneName == "PresentLevel")
+        {
+            camAnimatorRef = FindObjectOfType<CinemachineVirtualCamera>().gameObject.GetComponent<Animator>();
+        }
+        //camAnimatorRef = FindObjectOfType<CinemachineVirtualCamera>().gameObject.GetComponent<Animator>();
 
         canTimeTravel = false;
+
+        GameManager gameManager = GameManager.Instance;
 
         //movement setup
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -66,8 +75,8 @@ public class playerTest : MonoBehaviour
         emptyShell.thumbnail = null;
         emptyShell.name = null;
 
-        inventory.health = 5;
-        inventory.sand = 0;
+        inventory.health = PlayerPrefs.GetInt(gameManager.playerHealth);
+        inventory.sand = PlayerPrefs.GetInt(gameManager.playerSand);
         inventory.items = new Item[5];
         for(int i = 0; i < inventory.items.Length; i++)
         {
@@ -76,7 +85,9 @@ public class playerTest : MonoBehaviour
         
         //player init
         isInvulnerable = false;
-        currSceneName = SceneManager.GetActiveScene().name;
+
+        //Debug.Log($"{inventory.health}, {inventory.sand}");
+
     }
 
     // Update is called once per frame
@@ -138,33 +149,35 @@ public class playerTest : MonoBehaviour
         isInvulnerable = false;
     }
 
-    IEnumerator camAnim()
-    {
-        camAnimatorRef.SetBool("Zoomout", true);
-        yield return new WaitForSeconds(2);
-        camAnimatorRef.SetBool("Zoomout", false);
-    }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "invisibleBox")
         {
-            StartCoroutine(camAnim());
-            canTimeTravel = true;
             NotifTxt.SetActive(true);
+            if (currSceneName == "PresentLevel")
+            {
+                camAnimatorRef.SetBool("Zoomout", true);
+            }
+            canTimeTravel = true;
         }
     }
-
-
-
 
     public void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "invisibleBox")
         {
-            canTimeTravel = false;
             NotifTxt.SetActive(false);
+            if (currSceneName == "PresentLevel")
+            {
+                camAnimatorRef.SetBool("Zoomout", true);
+            }
+            canTimeTravel = false;
         }
     }
+
+
+
+
 
 }
