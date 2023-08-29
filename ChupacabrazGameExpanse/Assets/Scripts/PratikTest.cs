@@ -6,7 +6,7 @@ public class PratikTest : MonoBehaviour
 {
     private int pratikDamage = 1;
     public playerTest pscript;
-    public float range = 5f;
+    public float range = 10f;
     public float speed = 2f;
     public GameObject player;
     private void OnCollisionEnter2D(Collision2D collision)
@@ -27,8 +27,8 @@ public class PratikTest : MonoBehaviour
     {
         if (player)
         {
-            float distance = Vector3.Distance(transform.position, player.transform.position);
-            if (distance <= range)
+            float distancep = Vector3.Distance(transform.position, player.transform.position);
+            if (distancep <= range)
             {
                 transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
             }

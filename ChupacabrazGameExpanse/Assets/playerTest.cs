@@ -95,6 +95,7 @@ public class playerTest : MonoBehaviour
     {
 
         //camAnimatorRef.SetBool("Zoomout", false);
+        //Debug.Log(inventory.health);
 
         rb.velocity = new Vector2(x: horizontal * playerSpeed, y: rb.velocity.y);
         horizontal = Input.GetAxis("Horizontal");
