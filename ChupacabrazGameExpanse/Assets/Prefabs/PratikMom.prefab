@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8042425600777826671
+--- !u!1 &6786861174628246656
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3895596380423278843}
-  - component: {fileID: 2847969623168290078}
-  - component: {fileID: 3587362895335504833}
-  - component: {fileID: 7482815239187093832}
-  - component: {fileID: 928837946267888350}
-  - component: {fileID: 5748187740901463633}
+  - component: {fileID: 3807653341648494145}
+  - component: {fileID: 8679693092984304139}
+  - component: {fileID: 461232511692381597}
+  - component: {fileID: 5319228672956132496}
+  - component: {fileID: 9001069896095005875}
   m_Layer: 0
-  m_Name: Pratik
+  m_Name: PratikMom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3895596380423278843
+--- !u!4 &3807653341648494145
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8042425600777826671}
+  m_GameObject: {fileID: 6786861174628246656}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.53, y: -0.7, z: 0}
-  m_LocalScale: {x: 1, y: 0.7024, z: 1}
+  m_LocalPosition: {x: -2.9032867, y: -0.33433843, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2847969623168290078
+--- !u!212 &8679693092984304139
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8042425600777826671}
+  m_GameObject: {fileID: 6786861174628246656}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -88,13 +87,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3587362895335504833
+--- !u!61 &461232511692381597
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8042425600777826671}
+  m_GameObject: {fileID: 6786861174628246656}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -133,14 +132,14 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &7482815239187093832
+--- !u!50 &5319228672956132496
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8042425600777826671}
+  m_GameObject: {fileID: 6786861174628246656}
   m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -160,31 +159,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &928837946267888350
+--- !u!114 &9001069896095005875
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8042425600777826671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f57a4d049b0c9745a929da975bb653e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pscript: {fileID: 0}
-  range: 5
-  speed: 2
-  player: {fileID: 0}
---- !u!114 &5748187740901463633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8042425600777826671}
+  m_GameObject: {fileID: 6786861174628246656}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8b6a846c4d883141abbf1b45582a43d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pratikMomDamage: 1
+  bulletVel: 20
+  player: {fileID: 0}
+  bult: {fileID: 519718615811649225, guid: 216af8ae5a20e9940b6803b88ef9701c, type: 3}
+  momrange: 10
+  canShoot: 0
+  direction: {x: 0, y: 0}
+  posi: right
