@@ -36,15 +36,20 @@ public class playerTest : MonoBehaviour
     private bool isInvulnerable;
     private string currSceneName;
 
+    public bool canTimeTravel;
+
 
     // Reference variables for unity
     public GameObject NotifTxt;
 
 
 
+
     // Start is called before the first frame update
     void Start()
     {
+        canTimeTravel = false;
+
         //movement setup
         rb = gameObject.GetComponent<Rigidbody2D>();
         rayCastLength = 0.7f;
@@ -89,17 +94,21 @@ public class playerTest : MonoBehaviour
         //time travelling
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (currSceneName == "PresentLevel")
+            if (canTimeTravel)
             {
-                SceneManager.LoadScene("FutureLevel");
-                currSceneName = "FutureLevel";
-            }else if(currSceneName == "FutureLevel")
-            {
-                SceneManager.LoadScene("PresentLevel");
-                currSceneName = "PresentLevel";
-            }
+                if (currSceneName == "PresentLevel")
+                {
+                    SceneManager.LoadScene("FutureLevel");
+                    currSceneName = "FutureLevel";
+                }
+                else if (currSceneName == "FutureLevel")
+                {
+                    SceneManager.LoadScene("PresentLevel");
+                    currSceneName = "PresentLevel";
+                }
 
-            Debug.Log(currSceneName);
+                Debug.Log(currSceneName);
+            }
         }
     }
 
@@ -128,6 +137,7 @@ public class playerTest : MonoBehaviour
     {
         if (collision.gameObject.tag == "invisibleBox")
         {
+            canTimeTravel = true;
             NotifTxt.SetActive(true);
         }
     }
@@ -136,6 +146,7 @@ public class playerTest : MonoBehaviour
     {
         if (collision.gameObject.tag == "invisibleBox")
         {
+            canTimeTravel = false;
             NotifTxt.SetActive(false);
         }
     }

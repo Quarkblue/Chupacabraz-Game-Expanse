@@ -1360,7 +1360,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press R to travel back to present
+  m_text: Press E to travel back to present
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2091,6 +2091,10 @@ PrefabInstance:
       propertyPath: NotifTxt
       value: 
       objectReference: {fileID: 983744627}
+    - target: {fileID: 6542572631349215142, guid: fe98c8148333c974abd0b66fbf488d9e, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 53319eed3f8cc7146997255fd031fdb3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

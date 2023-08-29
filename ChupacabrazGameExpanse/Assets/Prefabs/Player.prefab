@@ -139,7 +139,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 2
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 53319eed3f8cc7146997255fd031fdb3, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -165,6 +165,8 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 8
+  canTimeTravel: 0
+  NotifTxt: {fileID: 0}
 --- !u!1 &3157667823763685108
 GameObject:
   m_ObjectHideFlags: 0
