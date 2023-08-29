@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
@@ -41,13 +42,16 @@ public class playerTest : MonoBehaviour
 
     // Reference variables for unity
     public GameObject NotifTxt;
-
+    public Animator camAnimatorRef;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+
+        camAnimatorRef = Object.FindObjectOfType<CinemachineVirtualCamera>().gameObject.GetComponent<Animator>();
+
         canTimeTravel = false;
 
         //movement setup
@@ -78,7 +82,9 @@ public class playerTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        //camAnimatorRef.SetBool("Zoomout", false);
+
         rb.velocity = new Vector2(x: horizontal * playerSpeed, y: rb.velocity.y);
         horizontal = Input.GetAxis("Horizontal");
 
@@ -132,15 +138,25 @@ public class playerTest : MonoBehaviour
         isInvulnerable = false;
     }
 
+    IEnumerator camAnim()
+    {
+        camAnimatorRef.SetBool("Zoomout", true);
+        yield return new WaitForSeconds(2);
+        camAnimatorRef.SetBool("Zoomout", false);
+    }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "invisibleBox")
         {
+            StartCoroutine(camAnim());
             canTimeTravel = true;
             NotifTxt.SetActive(true);
         }
     }
+
+
+
 
     public void OnTriggerExit2D(Collider2D collision)
     {
