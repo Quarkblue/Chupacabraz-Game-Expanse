@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Collections;
 using UnityEditor;
 using UnityEngine;
@@ -46,6 +47,8 @@ public class playerTest : MonoBehaviour
     private SpriteRenderer sp;
 
     public GameManager gameManager;
+    public TMPro.TextMeshProUGUI sand, health;
+
 
     // "playerHealth", "playerSand", "playerItems", "playerSequenceIndex"
 
@@ -58,6 +61,9 @@ public class playerTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        sand = GameObject.FindGameObjectWithTag("sandTxt").GetComponent<TextMeshProUGUI>();
+        health = GameObject.FindGameObjectWithTag("healthTxt").GetComponent<TextMeshProUGUI>();
         currSceneName = SceneManager.GetActiveScene().name;
 
         NotifTxt = GameObject.Find("TimeTravelTxt");
@@ -107,6 +113,8 @@ public class playerTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        health.text = $"Health: {inventory.health}";
+        sand.text = $"Sand: {inventory.sand}";
 
         //camAnimatorRef.SetBool("Zoomout", false);
         //Debug.Log(inventory.health);

@@ -13,6 +13,7 @@ public class HealthBoostItemTest : MonoBehaviour
             if (pscript != null && pscript.inventory.health < 100)
             {
                 pscript.inventory.health = pscript.inventory.health + 1;
+                //PlayerPrefs.SetInt("playerHealth", PlayerPrefs.GetInt("playerHealth") + 1);
                 Destroy(gameObject);
             }
         }

@@ -9,6 +9,9 @@ TagManager:
   - portal
   - Bridge
   - Weapon
+  - Health
+  - healthTxt
+  - sandTxt
   layers:
   - Default
   - TransparentFX

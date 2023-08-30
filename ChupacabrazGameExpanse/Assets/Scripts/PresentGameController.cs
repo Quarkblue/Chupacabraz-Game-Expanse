@@ -17,7 +17,7 @@ public class PresentGameController : MonoBehaviour
     public GameObject preMazeTxt;
     public GameObject PostMazeTxt;
     public GameObject bridge;
-
+    public TMPro.TextMeshProUGUI sand, health;
 
     public float timeRemaining = 120;
 
@@ -78,6 +78,9 @@ public class PresentGameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        sand.text = $"Sand: {PlayerPrefs.GetInt(gameManager.playerSand)}";
+        health.text = $"Health: {PlayerPrefs.GetInt(gameManager.playerHealth)}";
+
         if (PlayerPrefs.GetInt(gameManager.playerSequenceIndex) == 1)
         {
             currObjective.SetActive(true);
@@ -88,7 +91,7 @@ public class PresentGameController : MonoBehaviour
                 float seconds = Mathf.FloorToInt(timeRemaining % 60);
 
                 timeRemaining = timeRemaining - Time.deltaTime;
-                timerTxt.text = $"Timer: {minutes}:{seconds}";
+                timerTxt.text = $"Time: {minutes}:{seconds}";
             }
             else
             {
