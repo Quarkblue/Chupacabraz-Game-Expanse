@@ -12,6 +12,7 @@ public class PratikMom : MonoBehaviour
     public bool canShoot;
     public Vector2 direction;
     public string posi = "right";
+    public Vector2 directionalVelocity;
 
     // Start is called before the first frame update
     void Start()
@@ -36,8 +37,8 @@ public class PratikMom : MonoBehaviour
             
             transform.Rotate(0, 0, 180);
             posi = posi == "right" ? "left" : "right";
-            Debug.Log("changes" + posi);
         }
+        directionalVelocity = posi == "left" ? new Vector2(-6.78f, -0.23f) : new Vector2(6.78f, -0.23f);
     }
 
     void BultThalleKhadiH()
@@ -46,8 +47,7 @@ public class PratikMom : MonoBehaviour
         {
             GameObject newBult = Instantiate(bult,transform.position,Quaternion.identity);
             direction = (player.transform.position - transform.position);
-            newBult.GetComponent<Rigidbody2D>().velocity = Time.deltaTime * bulletVel * direction *20 ;
-
+            newBult.GetComponent<Rigidbody2D>().velocity = Time.deltaTime * bulletVel * directionalVelocity *20 ;
         }
     }
 
