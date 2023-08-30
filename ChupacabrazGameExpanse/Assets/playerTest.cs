@@ -42,8 +42,18 @@ public class playerTest : MonoBehaviour
 
     public GameObject NotifTxt;
     private Animator camAnimatorRef;
+    private Animator playerAnim;
+    private SpriteRenderer sp;
+
+    public GameManager gameManager;
 
     // "playerHealth", "playerSand", "playerItems", "playerSequenceIndex"
+
+    private void Awake()
+    {
+        gameManager = GameManager.Instance;
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +63,10 @@ public class playerTest : MonoBehaviour
         NotifTxt = GameObject.Find("TimeTravelTxt");
         NotifTxt.SetActive(false);
         groundLayerMask = LayerMask.GetMask("Ground");
+
+        playerAnim = gameObject.GetComponent<Animator>();
+        sp = gameObject.GetComponent<SpriteRenderer>();
+
         if (currSceneName == "PresentLevel")
         {
             camAnimatorRef = FindObjectOfType<CinemachineVirtualCamera>().gameObject.GetComponent<Animator>();
@@ -65,7 +79,7 @@ public class playerTest : MonoBehaviour
 
         //movement setup
         rb = gameObject.GetComponent<Rigidbody2D>();
-        rayCastLength = 0.7f;
+        rayCastLength = 1;
         isGrounded = true;
         playerSpeed = 5;
         jumpForce = 10;
@@ -99,6 +113,24 @@ public class playerTest : MonoBehaviour
 
         rb.velocity = new Vector2(x: horizontal * playerSpeed, y: rb.velocity.y);
         horizontal = Input.GetAxis("Horizontal");
+
+        if(rb.velocity.x > 0)
+        {
+            sp.flipX = true;
+        }else if(rb.velocity.x < 0)
+        {
+            sp.flipX = false;
+        }
+
+        if(horizontal != 0)
+        {
+            playerAnim.SetBool("isWalking", true);
+        }
+        else
+        {
+            playerAnim.SetBool("isWalking", false);
+        }
+
 
         //jump mechanic
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
@@ -139,24 +171,37 @@ public class playerTest : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+            //rb.AddForce(new Vector2(x: -10, y: 0), ForceMode2D.Impulse);
             StartCoroutine(invulnerability());
         }
     }
-    
+
+
     IEnumerator invulnerability()
     {
+        playerAnim.SetBool("isDamaged", true);
         isInvulnerable = true;
         yield return new WaitForSeconds(2);
         isInvulnerable = false;
+        playerAnim.SetBool("isDamaged", false);
+
     }
 
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "portal")
+        {
+            PresentGameController presentGameController = FindObjectOfType<PresentGameController>();
+            presentGameController.toMaze();
+        }
+    }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "invisibleBox")
         {
             NotifTxt.SetActive(true);
-            if (currSceneName == "PresentLevel")
+            if (currSceneName == "PresentLevel" && PlayerPrefs.GetInt(gameManager.playerSequenceIndex) == 0)
             {
                 camAnimatorRef.SetBool("Zoomout", true);
             }
@@ -169,7 +214,7 @@ public class playerTest : MonoBehaviour
         if (collision.gameObject.tag == "invisibleBox")
         {
             NotifTxt.SetActive(false);
-            if (currSceneName == "PresentLevel")
+            if (currSceneName == "PresentLevel" && PlayerPrefs.GetInt(gameManager.playerSequenceIndex) == 0)
             {
                 camAnimatorRef.SetBool("Zoomout", true);
             }

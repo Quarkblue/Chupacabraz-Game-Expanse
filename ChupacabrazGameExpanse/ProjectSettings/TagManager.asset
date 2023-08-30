@@ -6,6 +6,9 @@ TagManager:
   tags:
   - invisibleBox
   - Bult
+  - portal
+  - Bridge
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -60,4 +63,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3062862033
+    locked: 0
+  - name: AnimLayer
+    uniqueID: 2954206527
     locked: 0

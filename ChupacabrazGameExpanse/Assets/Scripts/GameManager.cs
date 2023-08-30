@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        LoadData();
     }
 
     // Update is called once per frame
@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("playerSequenceIndex", 0);
         PlayerPrefs.SetInt("playerHealth", 5);
         PlayerPrefs.SetInt("playerSand", 0);
+        PlayerPrefs.SetInt("mazeRunner", 0);
     }
 
 }

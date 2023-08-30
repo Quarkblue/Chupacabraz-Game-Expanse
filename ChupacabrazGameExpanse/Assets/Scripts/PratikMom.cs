@@ -13,6 +13,8 @@ public class PratikMom : MonoBehaviour
     public Vector2 direction;
     public string posi = "right";
     public Vector2 directionalVelocity;
+    public GameObject timelessSandPrefab;
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +49,7 @@ public class PratikMom : MonoBehaviour
         {
             GameObject newBult = Instantiate(bult,transform.position,Quaternion.identity);
             direction = (player.transform.position - transform.position);
-            newBult.GetComponent<Rigidbody2D>().velocity = Time.deltaTime * bulletVel * directionalVelocity *20 ;
+            newBult.GetComponent<Rigidbody2D>().velocity = Time.deltaTime * bulletVel * directionalVelocity *20;
         }
     }
 
@@ -58,6 +60,22 @@ public class PratikMom : MonoBehaviour
             playerTest pscript = collision.gameObject.GetComponent<playerTest>();
             pscript.takeDamage(pratikMomDamage);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Weapon"))
+        {
+            Die();
+        }
+    }
+
+
+    public void Die()
+    {
+        //Instantiate(timelessSandPrefab, transform.position, Quaternion.identity);
+        //timelessSandPrefab.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 5), ForceMode2D.Impulse);
+        Destroy(gameObject);
     }
 
     IEnumerator canYouTho()

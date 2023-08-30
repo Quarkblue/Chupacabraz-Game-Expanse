@@ -9,22 +9,19 @@ public class PratikTest : MonoBehaviour
     public float range = 10f;
     public float speed = 2f;
     public GameObject player;
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            pscript = collision.gameObject.GetComponent<playerTest>();
-            pscript.takeDamage(pratikDamage);
-        }
-    }
+    public GameObject timelessSandPrefab;
+    
 
     void Start()
     {
         // Assuming the player has a tag "Player"
         player = GameObject.FindGameObjectWithTag("Player");
+
     }
     private void Update()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+
         if (player)
         {
             float distancep = Vector3.Distance(transform.position, player.transform.position);
@@ -34,4 +31,30 @@ public class PratikTest : MonoBehaviour
             }
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            pscript = collision.gameObject.GetComponent<playerTest>();
+            pscript.takeDamage(pratikDamage);
+        }
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Weapon"))
+        {
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        //Instantiate(timelessSandPrefab, transform.position, Quaternion.identity);
+        //timelessSandPrefab.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 5), ForceMode2D.Impulse);
+        Destroy(gameObject);
+    }
+
 }

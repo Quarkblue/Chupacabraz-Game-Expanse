@@ -11,16 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartScreen.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: Assets/Scenes/Game/Test/PortPre.unity
-    guid: 87a5eb6fb58b7bb408965adc50e9d23f
-  - enabled: 0
-    path: Assets/Scenes/Game/Test/PortPost.unity
-    guid: 9dcf929bea9d6974fa6ae98594ce52bb
   - enabled: 1
     path: Assets/Scenes/Game/PresentLevel.unity
     guid: 697bae65402585c4bb2644e7bd1b72c9
   - enabled: 1
     path: Assets/Scenes/Game/FutureLevel.unity
     guid: 2396c03a95a0a3846823a57987c848c4
+  - enabled: 1
+    path: Assets/Scenes/Game/Maze.unity
+    guid: 99590ebee2420f84d8e8ac6c8f5a7b62
   m_configObjects: {}
